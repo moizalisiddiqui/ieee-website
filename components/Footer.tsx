@@ -1,0 +1,189 @@
+'use client'
+
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { motion } from 'framer-motion'
+import { Github, Linkedin, Instagram, Twitter, Mail, MapPin } from 'lucide-react'
+
+const stars = Array.from({ length: 60 }, (_, i) => ({
+  id: i,
+  x: Math.random() * 100,
+  y: Math.random() * 100,
+  size: Math.random() * 2 + 0.5,
+  delay: Math.random() * 3,
+}))
+
+export function Footer() {
+  const pathname = usePathname()
+  const isTechNova = pathname.startsWith('/technova')
+
+  return (
+    <footer
+      className="relative overflow-hidden"
+      style={{
+        background: 'var(--surface)',
+        borderTop: '1px solid var(--border)',
+      }}
+      role="contentinfo"
+    >
+      {/* Animated stars */}
+      <div className="absolute inset-0 pointer-events-none">
+        {stars.map((s) => (
+          <motion.div
+            key={s.id}
+            className="absolute rounded-full bg-white"
+            style={{
+              left: `${s.x}%`,
+              top: `${s.y}%`,
+              width: s.size,
+              height: s.size,
+            }}
+            animate={{ opacity: [0.2, 0.9, 0.2] }}
+            transition={{ duration: 3 + s.delay, repeat: Infinity, ease: 'easeInOut', delay: s.delay }}
+          />
+        ))}
+      </div>
+
+      {/* Top glow */}
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-px"
+        style={{ background: 'linear-gradient(90deg, transparent, var(--primary), transparent)' }}
+      />
+
+      <div className="relative max-w-7xl mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+          {/* Brand */}
+          <div className="md:col-span-2">
+            <div className="flex items-center gap-3 mb-4">
+              <div
+                className="w-10 h-10 rounded-xl flex items-center justify-center text-lg font-black"
+                style={{
+                  background: 'linear-gradient(135deg, #006bbd, #003d6e)',
+                  boxShadow: '0 0 20px rgba(0,107,189,0.4)',
+                }}
+              >
+                ⚡
+              </div>
+              <div>
+                <h3
+                  className="font-bold text-xl"
+                  style={{ fontFamily: 'var(--font-display)', color: 'var(--text)' }}
+                >
+                  IEEE Student Branch
+                </h3>
+                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                  Institute of Buisness & Management
+                </p>
+              </div>
+            </div>
+            <p className="text-sm leading-relaxed mb-6 max-w-sm" style={{ color: 'var(--text-muted)' }}>
+              Empowering the next generation of engineers and technologists through innovation,
+              collaboration, and world-class events.
+            </p>
+            <div className="flex gap-3">
+              {[
+                { icon: Github, href: 'https://github.com', label: 'GitHub' },
+                { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
+                { icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
+                { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
+              ].map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  style={{
+                    background: 'rgba(255,255,255,0.05)',
+                    border: '1px solid var(--border)',
+                    color: 'var(--text-muted)',
+                  }}
+                  onMouseEnter={(e) => {
+                    ;(e.currentTarget as HTMLElement).style.background = 'rgba(0,107,189,0.2)'
+                    ;(e.currentTarget as HTMLElement).style.color = '#4da6ff'
+                  }}
+                  onMouseLeave={(e) => {
+                    ;(e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)'
+                    ;(e.currentTarget as HTMLElement).style.color = 'var(--text-muted)'
+                  }}
+                >
+                  <Icon size={16} />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h4
+              className="font-semibold text-sm uppercase tracking-widest mb-4"
+              style={{ color: 'var(--primary-light, #4da6ff)' }}
+            >
+              Navigation
+            </h4>
+            <ul className="space-y-2">
+              {[
+                { href: '/', label: 'Home' },
+                { href: '/events', label: 'Events' },
+                { href: '/team', label: 'Our Team' },
+                { href: '/gallery', label: 'Gallery' },
+                { href: '/technova', label: 'TechNova 2026' },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm transition-colors duration-200 hover:text-white"
+                    style={{ color: 'var(--text-muted)' }}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4
+              className="font-semibold text-sm uppercase tracking-widest mb-4"
+              style={{ color: 'var(--primary-light, #4da6ff)' }}
+            >
+              Contact
+            </h4>
+            <ul className="space-y-3">
+              <li className="flex items-start gap-2">
+                <Mail size={14} className="mt-0.5 flex-shrink-0" style={{ color: 'var(--primary-light)' }} />
+                <a
+                  href="mailto:ieee@neduet.edu.pk"
+                  className="text-sm transition-colors hover:text-white"
+                  style={{ color: 'var(--text-muted)' }}
+                >
+                  ieee@neduet.edu.pk
+                </a>
+              </li>
+              <li className="flex items-start gap-2">
+                <MapPin size={14} className="mt-0.5 flex-shrink-0" style={{ color: 'var(--primary-light)' }} />
+                <span className="text-sm" style={{ color: 'var(--text-muted)' }}>
+                  Institute of Buisness & Management, Karachi, Pakistan
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          className="mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4"
+          style={{ borderTop: '1px solid var(--border)' }}
+        >
+          <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+            © {new Date().getFullYear()} IEEE Student Branch — Institute of Buisness & Management. All rights reserved.
+          </p>
+          <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+            Built by Moiz Ali Siddiqui
+          </p>
+        </div>
+      </div>
+    </footer>
+  )
+}
