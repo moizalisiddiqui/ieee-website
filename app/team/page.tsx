@@ -8,7 +8,8 @@ export const metadata: Metadata = {
 
 export default function TeamPage() {
   return (
-    <div style={{ paddingTop: '100px' }}>
+    // Only padding for the navbar, no background logic needed here
+    <div className="pt-[100px] min-h-screen">
       <TeamGrid />
     </div>
   )
