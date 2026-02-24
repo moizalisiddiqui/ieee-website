@@ -4,10 +4,10 @@ import { AnimatedSection } from '@/components/AnimatedSection'
 import { Counter } from '@/components/Counter'
 
 const stats = [
-  { value: 850, suffix: '+', label: 'Active Members', description: 'Passionate engineers' },
-  { value: 120, suffix: '+', label: 'Events Hosted', description: 'Workshops, hackathons & more' },
-  { value: 6, suffix: '', label: 'Years Active', description: 'Building the future' },
-  { value: 15000, suffix: '+', label: 'Lives Impacted', description: 'Through innovation' },
+  { value: 50, suffix: '+', label: 'Active Members', description: 'Passionate engineers' },
+  { value: 30, suffix: '+', label: 'Events Hosted', description: 'Workshops, hackathons & more' },
+  { value: 3, suffix: '+', label: 'Years Active', description: 'Building the future' },
+  // { value: 1500, suffix: '+', label: 'Leaders built', description: 'Through innovation' },
 ]
 
 export function StatsSection() {
@@ -21,7 +21,7 @@ export function StatsSection() {
         }}
       />
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
           {stats.map((stat, i) => (
             <AnimatedSection key={stat.label} delay={i * 0.1} direction="up">
               <div
