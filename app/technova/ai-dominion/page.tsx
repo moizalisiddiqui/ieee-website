@@ -15,7 +15,7 @@ const modules = [
     workflow: [
       'Problem statement revealed at opening ceremony',
       'Teams design agent architecture (roles, tools, memory flow)',
-      'Development phase (24–48 hours)',
+      'Development phase (24 hours)',
       'Integration with APIs or automation tools',
       'Live demo of working system',
       'Final presentation & Q&A',
