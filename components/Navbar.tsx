@@ -18,7 +18,6 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
 
-  // Hide main navbar on technova routes (has its own)
   const isTechNova = pathname.startsWith('/technova')
 
   useEffect(() => {
@@ -55,28 +54,35 @@ export function Navbar() {
             boxShadow: scrolled ? '0 8px 32px rgba(0,0,0,0.4)' : 'none',
           }}
         >
-          <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group" aria-label="IEEE Student Branch Home">
-              <div
-                className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-black transition-all duration-300 group-hover:scale-110"
-                style={{
-                  background: 'linear-gradient(135deg, var(--ieee-blue, #006bbd), var(--ieee-dark, #003d6e))',
-                  boxShadow: '0 0 16px rgba(0,107,189,0.5)',
-                }}
-              >
-                ⚡
-              </div>
-              <span
-                className="font-bold text-lg hidden sm:block"
-                style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}
-              >
-                IEEE <span style={{ color: '#4da6ff' }}>SB</span>
-              </span>
-            </Link>
+          <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between relative">
+            
+            {/* 1. Left: Logo Area */}
+            <div className="flex-1 flex justify-start">
+              <Link href="/" className="flex items-center gap-3 group" aria-label="IEEE Student Branch Home">
+                {/* LOGO REPLACED HERE */}
+                <div className="relative w-10 h-10 flex items-center justify-center">
+                   {/* Optional Glow Effect behind Logo */}
+                  <div 
+                    className="absolute inset-0 bg-blue-500 rounded-full blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500"
+                  />
+                  <img 
+                    src="/IEEE.svg" // Ensure you have this file in your /public folder
+                    alt="IEEE Logo"
+                    className="w-full h-full object-contain relative z-10 transition-transform duration-300 group-hover:scale-110"
+                  />
+                </div>
+                
+                <span
+                  className="font-bold text-lg hidden lg:block"
+                  style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}
+                >
+                  IEEE IoBM <span style={{ color: '#4da6ff' }}>Student Branch</span>
+                </span>
+              </Link>
+            </div>
 
-            {/* Desktop Links */}
-            <div className="hidden md:flex items-center gap-1">
+            {/* 2. Middle: Desktop Links */}
+            <div className="hidden md:flex items-center justify-center gap-1 flex-1">
               {links.map((link) => (
                 <Link
                   key={link.href}
@@ -85,7 +91,6 @@ export function Navbar() {
                   style={{
                     color: pathname === link.href ? '#4da6ff' : 'var(--text-muted, #7a8ba8)',
                   }}
-                  aria-current={pathname === link.href ? 'page' : undefined}
                 >
                   {pathname === link.href && (
                     <motion.span
@@ -102,11 +107,11 @@ export function Navbar() {
               ))}
             </div>
 
-            {/* TechNova CTA + Mobile Menu */}
-            <div className="flex items-center gap-3">
+            {/* 3. Right: CTA */}
+            <div className="flex-1 flex justify-end items-center gap-3">
               <Link
                 href="/technova"
-                className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 hover:scale-105 active:scale-95"
+                className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 hover:scale-105 active:scale-95 whitespace-nowrap"
                 style={{
                   background: 'linear-gradient(135deg, #7c3aed, #a855f7)',
                   boxShadow: '0 0 20px rgba(168,85,247,0.3)',
@@ -121,8 +126,6 @@ export function Navbar() {
                 className="md:hidden p-2 rounded-lg transition-colors"
                 style={{ color: 'var(--text-muted)' }}
                 onClick={() => setMobileOpen((o) => !o)}
-                aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-                aria-expanded={mobileOpen}
               >
                 {mobileOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
