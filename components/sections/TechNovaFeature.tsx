@@ -62,15 +62,17 @@ export function TechNovaFeature() {
                     Flagship Event 2026
                   </div>
 
+                  {/* FIXED HEADING SECTION */}
                   <h2
-                    className="text-5xl md:text-6xl font-black leading-none mb-4"
+                    className="text-5xl md:text-6xl font-black leading-tight mb-4 pr-2"
                     style={{
                       fontFamily: 'var(--font-display)',
-                      letterSpacing: '-0.03em',
+                      letterSpacing: '-0.01em',
                       background: 'linear-gradient(135deg, #c084fc, #a855f7, #7c3aed)',
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
                       backgroundClip: 'text',
+                      display: 'inline-block', // Crucial for gradient rendering
                     }}
                   >
                     TechNova
@@ -104,7 +106,7 @@ export function TechNovaFeature() {
                     { icon: Trophy, value: 'PKR 500K+', label: 'Prize Pool' },
                     { icon: Users, value: '1000+', label: 'Participants' },
                     { icon: Zap, value: '12', label: 'Modules' },
-                    { icon: Rocket, value: '24-48h', label: 'Hackathon' },
+                    { icon: Rocket, value: '24h', label: 'Hackathon' },
                   ].map((item) => (
                     <div
                       key={item.label}

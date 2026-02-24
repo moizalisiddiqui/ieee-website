@@ -3,78 +3,91 @@
 import { AnimatedSection } from '@/components/AnimatedSection'
 
 const sponsors = [
-  { name: 'Microsoft', tier: 'platinum' },
-  // { name: 'Google', tier: 'platinum' },
-  { name: 'AWS', tier: 'gold' },
-  { name: 'Meta', tier: 'gold' },
-  // { name: 'Intel', tier: 'silver' },
-  // { name: 'Oracle', tier: 'silver' },
-  // { name: 'Samsung', tier: 'bronze' },
-  // { name: 'Huawei', tier: 'bronze' },
+  { name: 'TELEC', tier: 'titanium' },
+  { name: 'B.BRAUN', tier: 'gold' },
+  { name: 'TEXITEC', tier: 'gold' },
 ]
 
 export function SponsorsSection() {
+  const titaniumSponsors = sponsors.filter(s => s.tier === 'titanium')
+  const goldSponsors = sponsors.filter(s => s.tier === 'gold')
+
   return (
     <section className="py-24">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-4xl mx-auto px-6">
         <AnimatedSection className="text-center mb-16">
           <p
             className="text-xs uppercase tracking-widest font-semibold mb-3"
-            style={{ color: 'var(--primary-light, #4da6ff)' }}
+            style={{ color: '#4da6ff' }}
           >
-            Our Partners
+            Past Partners
           </p>
           <h2
-            className="text-3xl md:text-4xl font-black"
+            className="text-3xl md:text-5xl font-black"
             style={{ fontFamily: 'var(--font-display)', color: 'var(--text)' }}
           >
             Backed by Industry Leaders
           </h2>
         </AnimatedSection>
 
-        <AnimatedSection delay={0.2}>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {sponsors.map((sponsor) => (
+        <div className="space-y-8">
+          {/* Titanium Row - Single Large Card */}
+          <AnimatedSection delay={0.2} className="flex justify-center">
+            {titaniumSponsors.map((sponsor) => (
               <div
                 key={sponsor.name}
-                className="flex items-center justify-center p-6 rounded-2xl transition-all duration-300 group hover:scale-105 cursor-pointer"
+                className="w-full max-w-md flex items-center justify-center p-10 rounded-3xl transition-all duration-300 group hover:scale-[1.02] cursor-pointer"
                 style={{
-                  background: 'var(--surface)',
-                  border: '1px solid var(--border)',
+                  background: 'linear-gradient(145deg, rgba(226, 232, 240, 0.05), rgba(226, 232, 240, 0.01))',
+                  border: '1px solid rgba(226, 232, 240, 0.3)',
+                  boxShadow: '0 0 40px rgba(226, 232, 240, 0.1)',
                 }}
               >
                 <div className="text-center">
                   <div
-                    className="text-xl font-black mb-1 transition-colors duration-300"
-                    style={{
-                      fontFamily: 'var(--font-display)',
-                      color:
-                        sponsor.tier === 'platinum'
-                          ? '#e2e8f0'
-                          : sponsor.tier === 'gold'
-                          ? '#f59e0b'
-                          : sponsor.tier === 'silver'
-                          ? '#94a3b8'
-                          : '#cd7c3b',
-                    }}
+                    className="text-3xl md:text-4xl font-black mb-2 tracking-tight"
+                    style={{ fontFamily: 'var(--font-display)', color: '#e2e8f0' }}
                   >
                     {sponsor.name}
                   </div>
+                  <div className="text-sm uppercase tracking-[0.3em] opacity-60 font-bold" style={{ color: '#94a3b8' }}>
+                    {sponsor.tier} Partner
+                  </div>
+                </div>
+              </div>
+            ))}
+          </AnimatedSection>
+
+          {/* Gold Row - Two Medium Cards */}
+          <AnimatedSection delay={0.4} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {goldSponsors.map((sponsor) => (
+              <div
+                key={sponsor.name}
+                className="flex items-center justify-center p-8 rounded-2xl transition-all duration-300 group hover:scale-105 cursor-pointer"
+                style={{
+                  background: 'var(--surface)',
+                  border: '1px solid rgba(245, 158, 11, 0.2)',
+                }}
+              >
+                <div className="text-center">
                   <div
-                    className="text-xs uppercase tracking-widest"
-                    style={{ color: 'var(--text-muted)' }}
+                    className="text-xl md:text-2xl font-black mb-1"
+                    style={{ fontFamily: 'var(--font-display)', color: '#f59e0b' }}
                   >
+                    {sponsor.name}
+                  </div>
+                  <div className="text-xs uppercase tracking-widest opacity-70" style={{ color: 'var(--text-muted)' }}>
                     {sponsor.tier}
                   </div>
                 </div>
               </div>
             ))}
-          </div>
-        </AnimatedSection>
+          </AnimatedSection>
+        </div>
 
-        <AnimatedSection delay={0.3} className="text-center mt-10">
-          <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
-            Interested in sponsoring?{' '}
+        <AnimatedSection delay={0.6} className="text-center mt-16">
+          <p className="text-sm opacity-60" style={{ color: 'var(--text-muted)' }}>
+            Interested in sponsoring TechNova 2026?{' '}
             <a
               href="mailto:ieee@neduet.edu.pk"
               className="font-semibold hover:underline"
