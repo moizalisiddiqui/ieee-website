@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="ieee">
       <head>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/IEEE.svg" type="image/svg+xml" />
         <meta name="theme-color" content="#050a1f" />
       </head>
       {/* Remove 'noise' from body if it has a white/solid background, 
