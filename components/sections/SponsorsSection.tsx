@@ -51,7 +51,7 @@ export function SponsorsSection() {
                     {sponsor.name}
                   </div>
                   <div className="text-sm uppercase tracking-[0.3em] opacity-60 font-bold" style={{ color: '#94a3b8' }}>
-                    {sponsor.tier} Partner
+                    {sponsor.tier} Sponsor
                   </div>
                 </div>
               </div>
@@ -77,7 +77,7 @@ export function SponsorsSection() {
                     {sponsor.name}
                   </div>
                   <div className="text-xs uppercase tracking-widest opacity-70" style={{ color: 'var(--text-muted)' }}>
-                    {sponsor.tier}
+                    {sponsor.tier} Sponsor
                   </div>
                 </div>
               </div>

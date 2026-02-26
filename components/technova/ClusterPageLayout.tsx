@@ -3,9 +3,8 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { AnimatedSection } from '@/components/AnimatedSection'
-import { GlassCard } from '@/components/GlassCard'
 import { Starfield } from '@/components/technova/Starfield'
-import { ArrowLeft, ArrowRight, CheckCircle2, Clock, Trophy, Rocket } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Clock, Trophy, Rocket, CheckCircle2 } from 'lucide-react'
 
 export interface Module {
   title: string
@@ -30,97 +29,105 @@ interface ClusterPageProps {
 function ModuleCard({ mod, color }: { mod: Module; color: string }) {
   return (
     <div
-      className="p-8 rounded-2xl"
+      className="p-8 rounded-2xl h-full flex flex-col transition-all duration-300 hover:translate-y-[-4px]"
       style={{
         background: `${color}06`,
         border: `1px solid ${color}20`,
       }}
     >
-      {/* Header */}
-      <div className="flex items-start gap-4 mb-6">
-        <div
-          className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0"
-          style={{ background: `${color}15`, border: `1px solid ${color}30` }}
-        >
-          {mod.icon}
-        </div>
-        <div>
-          <h3
-            className="text-xl font-bold mb-2"
-            style={{ fontFamily: 'var(--font-display)', color: 'rgba(240,232,255,0.95)' }}
+      {/* Top Content Wrapper: flex-grow ensures this fills available space */}
+      <div className="flex-grow">
+        {/* Header */}
+        <div className="flex items-start gap-4 mb-6">
+          <div
+            className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0"
+            style={{ background: `${color}15`, border: `1px solid ${color}30` }}
           >
-            {mod.title}
-          </h3>
-          <p className="text-sm leading-relaxed" style={{ color: 'rgba(240,232,255,0.5)' }}>
-            {mod.overview}
-          </p>
-        </div>
-      </div>
-
-      {/* Workflow */}
-      <div className="mb-6">
-        <h4 className="text-xs uppercase tracking-widest font-semibold mb-3" style={{ color }}>
-          Workflow
-        </h4>
-        <div className="space-y-2">
-          {mod.workflow.map((step, i) => (
-            <div key={i} className="flex items-start gap-3">
-              <div
-                className="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5"
-                style={{ background: `${color}20`, color }}
-              >
-                {i + 1}
-              </div>
-              <p className="text-sm" style={{ color: 'rgba(240,232,255,0.6)' }}>
-                {step}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Focus areas */}
-      <div className="mb-4">
-        <h4 className="text-xs uppercase tracking-widest font-semibold mb-3" style={{ color }}>
-          Focus Areas
-        </h4>
-        <div className="flex flex-wrap gap-2">
-          {mod.focus.map((f) => (
-            <span
-              key={f}
-              className="px-3 py-1 rounded-full text-xs font-medium"
-              style={{ background: `${color}12`, color, border: `1px solid ${color}25` }}
+            {mod.icon}
+          </div>
+          <div>
+            <h3
+              className="text-xl font-bold mb-2"
+              style={{ fontFamily: 'var(--font-display)', color: 'rgba(240,232,255,0.95)' }}
             >
-              {f}
-            </span>
-          ))}
+              {mod.title}
+            </h3>
+            <p className="text-sm leading-relaxed" style={{ color: 'rgba(240,232,255,0.5)' }}>
+              {mod.overview}
+            </p>
+          </div>
+        </div>
+
+        {/* Workflow */}
+        <div className="mb-6">
+          <h4 className="text-xs uppercase tracking-widest font-semibold mb-3" style={{ color }}>
+            Workflow
+          </h4>
+          <div className="space-y-2">
+            {mod.workflow.map((step, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <div
+                  className="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5"
+                  style={{ background: `${color}20`, color }}
+                >
+                  {i + 1}
+                </div>
+                <p className="text-sm" style={{ color: 'rgba(240,232,255,0.6)' }}>
+                  {step}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Focus areas */}
+        <div className="mb-8">
+          <h4 className="text-xs uppercase tracking-widest font-semibold mb-3" style={{ color }}>
+            Focus Areas
+          </h4>
+          <div className="flex flex-wrap gap-2">
+            {mod.focus.map((f) => (
+              <span
+                key={f}
+                className="px-3 py-1 rounded-full text-xs font-medium"
+                style={{ background: `${color}12`, color, border: `1px solid ${color}25` }}
+              >
+                {f}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Prize */}
-      {mod.prize && (
-        <div
-          className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold"
-          style={{ background: 'rgba(245,158,11,0.1)', color: '#f59e0b', border: '1px solid rgba(245,158,11,0.2)' }}
-        >
-          <Trophy size={14} />
-          {mod.prize}
-        </div>
-      )}
+      {/* Bottom Content: Always pinned to the bottom of the card */}
+      <div className="mt-auto">
+        {mod.prize && (
+          <div
+            className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold mb-5"
+            style={{ 
+              background: 'rgba(245,158,11,0.1)', 
+              color: '#f59e0b', 
+              border: '1px solid rgba(245,158,11,0.2)' 
+            }}
+          >
+            <Trophy size={14} />
+            {mod.prize}
+          </div>
+        )}
 
-      {/* Register CTA */}
-      <div className="mt-5 pt-5" style={{ borderTop: `1px solid ${color}15` }}>
-        <a
-          href="https://forms.google.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-sm font-semibold transition-all hover:gap-3"
-          style={{ color }}
-        >
-          <Rocket size={14} />
-          Register for this Module
-          <ArrowRight size={14} />
-        </a>
+        <div className="pt-5" style={{ borderTop: `1px solid ${color}15` }}>
+          <a
+            href="https://forms.google.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-semibold transition-all hover:gap-3"
+            style={{ color }}
+          >
+            <Rocket size={14} />
+            Register for this Module
+            <ArrowRight size={14} />
+          </a>
+        </div>
       </div>
     </div>
   )
@@ -131,7 +138,6 @@ export function ClusterPageLayout({
   subtitle,
   icon,
   color,
-  bgGradient,
   description,
   modules,
   theme,
@@ -242,7 +248,7 @@ export function ClusterPageLayout({
         </div>
       </section>
 
-      {/* Modules */}
+      {/* Modules Grid */}
       <section className="py-20">
         <div className="max-w-6xl mx-auto px-6">
           <AnimatedSection className="text-center mb-16">
@@ -260,9 +266,10 @@ export function ClusterPageLayout({
             </h2>
           </AnimatedSection>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          {/* items-stretch ensures all grid items are the same height */}
+          <div className="grid md:grid-cols-2 gap-6 items-stretch">
             {modules.map((mod, i) => (
-              <AnimatedSection key={mod.title} delay={i * 0.15}>
+              <AnimatedSection key={mod.title} delay={i * 0.15} className="h-full">
                 <ModuleCard mod={mod} color={color} />
               </AnimatedSection>
             ))}

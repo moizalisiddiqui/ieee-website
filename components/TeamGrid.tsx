@@ -7,32 +7,32 @@ import { Linkedin, Github, Globe } from 'lucide-react'
 
 const teamData = {
   executive: {
-    title: "Executive Board",
-    members: [
-      { name: 'Hamna Saleem', role: 'Chairperson', department: 'Data Science', image: '/images/team/hs.jpg' },
-      { name: 'Muhammad Anas', role: 'Vice Chairperson', department: 'Computer Science', image: '/images/team/ma.jpg' },
-      { name: 'Moiz Ali Siddiqui', role: 'General Secretary', department: 'Software Engineering', image: '/images/team/mas.jpg' },
-      { name: 'Aashir Ali', role: 'Treasurer', department: 'Accounting & Finance', image: '/images/team/aa.jpg' },
-    ]
-  },
-  management: {
-    title: "Management & Operations",
-    members: [
-      { name: 'Hafsa Amir', role: 'Event Management Lead', department: 'Software Engineering', image: '/images/team/ha.jpg' },
-      { name: 'Laiba Lagari', role: 'Event Management Co-Lead', department: 'Software Engineering', image: '/images/team/ll.jpg' },
-    ]
-  },
-  creative: {
-    title: "Media & Creative Team",
-    members: [
-      { name: 'Abeeha Asif', role: 'Photographer', department: 'Computer Science', image: '/images/team/aa2.jpg' },
-      { name: 'Ramsha Imran', role: 'Videographer', department: 'Computer Science', image: '/images/team/ri.jpg' },
-      { name: 'Muhammad Haad Ali', role: 'Graphic Designer Lead', department: 'Computer Engineering', image: '/images/team/mha.jpg' },
-      { name: 'Javaria Sameen', role: 'Graphic Designer Co-Lead', department: 'Computer Engineering', image: '/images/team/js.jpg' },
-      { name: 'Zoya Nayab', role: 'Content Writer', department: 'Computer Science', image: '/images/team/zn.jpg' },
-      { name: 'Adeen Gul Sheikh', role: 'Social Media Manager', department: 'Computer Science', image: '/images/team/ags.jpg' },
-    ]
-  },
+  title: "Executive Board",
+  members: [
+    { name: 'Hamna Saleem', role: 'Chairperson', department: 'Data Science', image: '/images/team/hs.jpg' }, // JPG (already correct)
+    { name: 'Muhammad Anas', role: 'Vice Chairperson', department: 'Computer Science', image: '/images/team/ma.jpeg' }, 
+    { name: 'Moiz Ali Siddiqui', role: 'General Secretary', department: 'Software Engineering', image: '/images/team/mas.jpg' },
+    { name: 'Aashir Ali', role: 'Treasurer', department: 'Accounting & Finance', image: '/images/team/aa.jpeg' },
+  ]
+},
+management: {
+  title: "Management & Operations",
+  members: [
+    { name: 'Hafsa Amir', role: 'Event Management Lead', department: 'Software Engineering', image: '/images/team/ha.jpeg' },
+    { name: 'Laiba Lagari', role: 'Event Management Co-Lead', department: 'Software Engineering', image: '/images/team/ll.jpeg' },
+  ]
+},
+creative: {
+  title: "Media & Creative Team",
+  members: [
+    { name: 'Abeeha Asif', role: 'Photographer', department: 'Computer Science', image: '/images/team/aa2.jpeg' },
+    { name: 'Ramsha Imran', role: 'Videographer', department: 'Computer Science', image: '/images/team/ri.jpeg' },
+    { name: 'Muhammad Haad Ali', role: 'Graphic Designer Lead', department: 'Computer Engineering', image: '/images/team/mha.jpg' }, // JPG (already correct)
+    { name: 'Javaria Sameen', role: 'Graphic Designer Co-Lead', department: 'Computer Engineering', image: '/images/team/js.png' },
+    { name: 'Zoya Nayab', role: 'Content Writer', department: 'Computer Science', image: '/images/team/zn.jpeg' },
+    { name: 'Adeen Gul Sheikh', role: 'Social Media Manager', department: 'Computer Science', image: '/images/team/ags.jpeg' },
+  ]
+},
   faculty: {
     branchCounselor: [
       { name: 'Dr. Khalid Mahboob', role: 'Branch Counselor', department: 'Assistant Professor', image: '/images/team/faculty1.jpg' },
