@@ -83,7 +83,8 @@ export function TeamGrid() {
         {/* Executive Board */}
         <div>
           <SectionHeading>{teamData.executive.title}</SectionHeading>
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+          {/* Mobile: 1 col full-width | Desktop: 4 col */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
             {teamData.executive.members.map((member, i) => (
               <TeamMemberCard key={member.name} member={member} delay={i * 0.05} />
             ))}
@@ -93,7 +94,7 @@ export function TeamGrid() {
         {/* Management */}
         <div>
           <SectionHeading>{teamData.management.title}</SectionHeading>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 max-w-2xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8 max-w-2xl mx-auto">
             {teamData.management.members.map((member, i) => (
               <TeamMemberCard key={member.name} member={member} delay={i * 0.05} />
             ))}
@@ -103,7 +104,7 @@ export function TeamGrid() {
         {/* Creative Team */}
         <div>
           <SectionHeading>{teamData.creative.title}</SectionHeading>
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {teamData.creative.members.map((member, i) => (
               <TeamMemberCard key={member.name} member={member} delay={i * 0.05} />
             ))}
@@ -123,7 +124,7 @@ export function TeamGrid() {
             <SectionHeading>Branch Counselor</SectionHeading>
             <div className="flex justify-center">
               {teamData.faculty.branchCounselor.map((member) => (
-                <div key={member.name} className="w-full max-w-xs sm:max-w-sm">
+                <div key={member.name} className="w-full sm:max-w-sm">
                   <TeamMemberCard member={member} delay={0.1} isFaculty />
                 </div>
               ))}
@@ -132,7 +133,7 @@ export function TeamGrid() {
 
           <div>
             <SectionHeading>Faculty Advisors</SectionHeading>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 max-w-5xl mx-auto">
               {teamData.faculty.advisors.map((member, i) => (
                 <TeamMemberCard key={member.name} member={member} delay={i * 0.1} isFaculty />
               ))}
@@ -157,45 +158,98 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 function TeamMemberCard({ member, delay, isFaculty = false }: { member: any, delay: number, isFaculty?: boolean }) {
   return (
     <AnimatedSection delay={delay}>
-      <GlassCard className={`p-4 sm:p-6 group ${isFaculty ? 'border-blue-500/20' : ''}`} glow={false}>
-        <div className="flex flex-col items-center text-center">
-          <div className="relative mb-3 sm:mb-5">
+      <GlassCard className={`group ${isFaculty ? 'border-blue-500/20' : ''}`} glow={false}>
+        {/* 
+          Mobile layout: big horizontal card — large photo on the left, info on the right.
+          Takes the full screen width and feels substantial.
+          Desktop: vertical centered card (classic grid look).
+        */}
+        <div className="flex sm:flex-col items-center sm:items-center gap-0 sm:gap-0">
+
+          {/* Photo — full height strip on mobile, centered circle on desktop */}
+          <div className="relative flex-shrink-0 sm:mt-8 sm:mb-5">
+            {/* Glow ring */}
             <div
               className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               style={{
-                background: 'radial-gradient(circle, rgba(0,107,189,0.35) 0%, transparent 70%)',
-                filter: 'blur(10px)',
-                transform: 'scale(1.15)',
+                background: 'radial-gradient(circle, rgba(0,107,189,0.4) 0%, transparent 70%)',
+                filter: 'blur(14px)',
+                transform: 'scale(1.3)',
               }}
             />
-            <img
-              src={member.image}
-              alt={member.name}
-              className="w-16 h-16 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover rounded-full shadow-lg ring-2 ring-transparent group-hover:ring-[rgba(0,107,189,0.45)] grayscale group-hover:grayscale-0 transition-all duration-400 ease-out group-hover:scale-105 relative z-10"
-              onError={(e) => {
-                e.currentTarget.style.display = 'none'
-                const fallback = e.currentTarget.nextElementSibling as HTMLElement
-                if (fallback) fallback.style.display = 'flex'
-              }}
-            />
-            <div
-              className="w-16 h-16 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-full items-center justify-center text-base sm:text-xl font-black text-white group-hover:scale-105 transition-transform duration-300"
-              style={{ display: 'none', background: 'linear-gradient(135deg, #006bbd, #4da6ff)' }}
-            >
-              {member.name.split(' ').map((w: string) => w[0]).slice(0, 2).join('')}
+
+            {/* Image container: on mobile it's a tall rectangle (left column), on sm+ it's a circle */}
+            <div className="
+              w-36 h-36
+              sm:w-28 sm:h-28
+              lg:w-32 lg:h-32
+              relative overflow-hidden
+              rounded-2xl sm:rounded-full
+              ml-5 my-5 sm:m-0
+              shadow-xl
+              ring-2 ring-transparent group-hover:ring-[rgba(0,107,189,0.5)]
+              transition-all duration-500
+              group-hover:scale-105
+            ">
+              <img
+                src={member.image}
+                alt={member.name}
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none'
+                  const fallback = e.currentTarget.nextElementSibling as HTMLElement
+                  if (fallback) fallback.style.display = 'flex'
+                }}
+              />
+              {/* Initials fallback */}
+              <div
+                className="absolute inset-0 items-center justify-center text-2xl sm:text-xl font-black text-white"
+                style={{ display: 'none', background: 'linear-gradient(135deg, #006bbd, #4da6ff)' }}
+              >
+                {member.name.split(' ').map((w: string) => w[0]).slice(0, 2).join('')}
+              </div>
             </div>
           </div>
 
-          <h3 className="font-bold text-xs sm:text-sm md:text-base mb-0.5 leading-snug" style={{ color: 'var(--text)' }}>{member.name}</h3>
-          <p className="text-xs sm:text-sm font-semibold mb-0.5 sm:mb-1" style={{ color: '#4da6ff' }}>{member.role}</p>
-          <p className="text-[10px] sm:text-xs mb-3 sm:mb-4" style={{ color: 'var(--text-muted)' }}>{member.department}</p>
+          {/* Text — right of photo on mobile, below photo on desktop */}
+          <div className="flex-1 sm:flex-none sm:w-full px-5 sm:px-6 py-5 sm:pb-6 sm:pt-0 sm:text-center">
+            <h3
+              className="font-bold text-xl sm:text-base lg:text-lg mb-1 leading-tight"
+              style={{ color: 'var(--text)' }}
+            >
+              {member.name}
+            </h3>
+            <p
+              className="text-base sm:text-sm font-semibold mb-1"
+              style={{ color: '#4da6ff' }}
+            >
+              {member.role}
+            </p>
+            <p
+              className="text-sm sm:text-xs mb-4 sm:mb-4"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              {member.department}
+            </p>
 
-          <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            {[Linkedin, Globe].map((Icon, j) => (
-              <a key={j} href="#" className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center transition-all hover:scale-110" style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid var(--border)', color: 'var(--text-muted)' }}>
-                <Icon size={11} />
-              </a>
-            ))}
+            {/* Social links */}
+            <div className="flex gap-2 sm:justify-center">
+              {[Linkedin, Globe].map((Icon, j) => (
+                <a
+                  key={j}
+                  href="#"
+                  className="w-9 h-9 sm:w-7 sm:h-7 rounded-xl sm:rounded-lg flex items-center justify-center transition-all hover:scale-110 opacity-60 group-hover:opacity-100"
+                  style={{
+                    background: 'rgba(255,255,255,0.06)',
+                    border: '1px solid var(--border)',
+                    color: 'var(--text-muted)',
+                    minWidth: '36px',
+                  }}
+                >
+                  <Icon size={15} />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </GlassCard>
